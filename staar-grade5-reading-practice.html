@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 5 Reading Practice — STAAR Style</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744;
+    --blue: #2563eb;
+    --sky: #38bdf8;
+    --gold: #f59e0b;
+    --green: #16a34a;
+    --red: #dc2626;
+    --cream: #fef9ef;
+    --white: #ffffff;
+    --gray: #64748b;
+    --light: #f1f5f9;
+    --highlight-yellow: #fef08a;
+    --highlight-blue: #bae6fd;
+    --highlight-pink: #fecdd3;
+    --shadow: 0 4px 24px rgba(26,39,68,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .header-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .star-badge {
+    background: var(--gold);
+    color: var(--navy);
+    border-radius: 8px;
+    padding: 2px 10px;
+    font-size: 0.85rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+  .header-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: #94a3b8;
+  }
+  .progress-bar-wrap {
+    background: #334155;
+    border-radius: 99px;
+    height: 10px;
+    width: 140px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    background: linear-gradient(90deg, var(--sky), var(--blue));
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+
+  /* ===== LAYOUT ===== */
+  .main-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 16px 60px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 28px;
+    align-items: start;
+  }
+  @media (max-width: 800px) {
+    .main-wrap { grid-template-columns: 1fr; }
+    .sidebar { order: -1; }
+  }
+
+  /* ===== PASSAGE ===== */
+  .passage-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .passage-header {
+    background: var(--navy);
+    color: white;
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .passage-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+  }
+  .passage-tag {
+    font-size: 0.78rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 99px;
+    padding: 3px 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .passage-body {
+    padding: 28px 32px;
+    font-family: 'Merriweather', serif;
+    font-size: 0.97rem;
+    line-height: 1.9;
+    color: #1e293b;
+    user-select: text;
+  }
+  .passage-body p { margin-bottom: 14px; }
+  .passage-body .p-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    color: var(--blue);
+    font-size: 0.82rem;
+    margin-right: 4px;
+  }
+
+  /* Highlighting */
+  .highlight-yellow { background: var(--highlight-yellow); border-radius: 3px; }
+  .highlight-blue { background: var(--highlight-blue); border-radius: 3px; }
+  .highlight-pink { background: var(--highlight-pink); border-radius: 3px; }
+
+  /* ===== QUESTIONS ===== */
+  .questions-area {
+    padding: 0 32px 32px;
+  }
+  .section-divider {
+    border: none;
+    border-top: 2px dashed #e2e8f0;
+    margin: 28px 0 24px;
+  }
+  .q-block {
+    margin-bottom: 36px;
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .q-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: var(--blue);
+    margin-bottom: 4px;
+  }
+  .q-text {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .q-quote {
+    background: var(--light);
+    border-left: 4px solid var(--sky);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 16px;
+    font-family: 'Merriweather', serif;
+    font-style: italic;
+    font-size: 0.93rem;
+    margin-bottom: 14px;
+    color: #334155;
+    line-height: 1.7;
+  }
+
+  /* Answer choices */
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--light);
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.97rem;
+    color: var(--navy);
+    transition: all 0.18s;
+    position: relative;
+  }
+  .choice-btn:hover:not(.answered) {
+    border-color: var(--blue);
+    background: #eff6ff;
+    transform: translateX(3px);
+  }
+  .choice-btn.eliminated {
+    opacity: 0.42;
+    text-decoration: line-through;
+    text-decoration-color: var(--red);
+  }
+  .choice-btn.selected {
+    border-color: var(--blue);
+    background: #dbeafe;
+  }
+  .choice-btn.correct {
+    border-color: var(--green);
+    background: #dcfce7;
+  }
+  .choice-btn.incorrect {
+    border-color: var(--red);
+    background: #fee2e2;
+  }
+  .choice-letter {
+    font-weight: 800;
+    font-size: 1rem;
+    min-width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.18s;
+  }
+  .choice-btn.correct .choice-letter { background: var(--green); border-color: var(--green); color: white; }
+  .choice-btn.incorrect .choice-letter { background: var(--red); border-color: var(--red); color: white; }
+  .choice-btn.selected .choice-letter { background: var(--blue); border-color: var(--blue); color: white; }
+
+  /* Eliminate button (X) */
+  .elim-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fee2e2;
+    border: none;
+    color: var(--red);
+    font-size: 0.78rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.15s;
+    font-weight: 800;
+  }
+  .choice-btn:hover .elim-btn { opacity: 1; }
+  .choice-btn.eliminated .elim-btn { opacity: 1; background: #e2e8f0; color: var(--gray); }
+
+  /* Feedback */
+  .feedback-box {
+    margin-top: 16px;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .feedback-box.show { display: block; }
+  .feedback-box.correct-fb {
+    background: #f0fdf4;
+    border: 2px solid #86efac;
+    color: #166534;
+  }
+  .feedback-box.incorrect-fb {
+    background: #fff7ed;
+    border: 2px solid #fed7aa;
+    color: #9a3412;
+  }
+  .fb-title {
+    font-weight: 800;
+    font-size: 1rem;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .reteach {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    font-size: 0.9rem;
+    color: inherit;
+  }
+  .reteach strong { font-weight: 800; }
+
+  /* Submit button */
+  .submit-btn {
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 28px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.97rem;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: background 0.18s, transform 0.12s;
+    display: none;
+  }
+  .submit-btn.show { display: inline-flex; align-items: center; gap: 6px; }
+  .submit-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
+  .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; transform: none; }
+
+  /* Next Question button */
+  .next-btn-wrap {
+    display: none;
+    margin-top: 18px;
+    animation: fadeIn 0.4s ease;
+  }
+  .next-btn-wrap.show { display: flex; align-items: center; gap: 14px; }
+  .next-q-btn {
+    background: var(--navy);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 32px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.18s, transform 0.12s, box-shadow 0.12s;
+    box-shadow: 0 4px 14px rgba(26,39,68,0.18);
+  }
+  .next-q-btn:hover {
+    background: var(--blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37,99,235,0.25);
+  }
+  .next-q-btn.finish {
+    background: var(--green);
+  }
+  .next-q-btn.finish:hover {
+    background: #15803d;
+    box-shadow: 0 6px 20px rgba(22,163,74,0.25);
+  }
+  .next-hint {
+    font-size: 0.82rem;
+    color: var(--gray);
+    font-style: italic;
+  }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar { display: flex; flex-direction: column; gap: 18px; position: sticky; top: 80px; }
+
+  .tool-card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .tool-header {
+    background: var(--navy);
+    color: white;
+    padding: 12px 18px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tool-body { padding: 16px 18px; }
+
+  /* Highlighter tool */
+  .highlight-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .hl-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .hl-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+  .hl-btn.active { outline: 3px solid var(--navy); outline-offset: 2px; }
+  .hl-yellow { background: var(--highlight-yellow); color: #78350f; }
+  .hl-blue { background: var(--highlight-blue); color: #075985; }
+  .hl-pink { background: var(--highlight-pink); color: #9f1239; }
+  .hl-clear { background: #f1f5f9; color: var(--gray); }
+  .hl-tip { font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
+
+  /* Sticky note */
+  .sticky-note-area {
+    background: var(--highlight-yellow);
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 90px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    border: none;
+    width: 100%;
+    resize: vertical;
+    color: #78350f;
+    outline: none;
+    line-height: 1.6;
+  }
+  .sticky-note-area::placeholder { color: #a16207; opacity: 0.7; }
+  .note-label { font-size: 0.78rem; color: var(--gray); margin-bottom: 6px; font-weight: 700; }
+
+  /* Score tracker */
+  .score-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .score-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: var(--blue);
+  }
+  .score-label { font-size: 0.8rem; color: var(--gray); font-weight: 700; }
+  .score-dots { display: flex; gap: 5px; flex-wrap: wrap; }
+  .score-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    border: 2px solid #cbd5e1;
+    transition: all 0.2s;
+  }
+  .score-dot.correct { background: var(--green); border-color: var(--green); }
+  .score-dot.incorrect { background: var(--red); border-color: var(--red); }
+
+  /* Nav buttons */
+  .nav-btns { display: flex; gap: 8px; margin-top: 8px; }
+  .nav-btn {
+    flex: 1;
+    background: var(--light);
+    border: 2px solid #e2e8f0;
+    border-radius: 9px;
+    padding: 8px 0;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    color: var(--navy);
+    transition: all 0.15s;
+  }
+  .nav-btn:hover { background: #dbeafe; border-color: var(--blue); color: var(--blue); }
+
+  /* Question map */
+  .q-map { display: flex; gap: 6px; flex-wrap: wrap; }
+  .q-dot {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: var(--light);
+    border: 2px solid #e2e8f0;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.82rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    color: var(--gray);
+  }
+  .q-dot:hover { border-color: var(--blue); color: var(--blue); }
+  .q-dot.active { background: var(--blue); border-color: var(--blue); color: white; }
+  .q-dot.answered-correct { background: #dcfce7; border-color: var(--green); color: var(--green); }
+  .q-dot.answered-incorrect { background: #fee2e2; border-color: var(--red); color: var(--red); }
+
+  /* ===== SUMMARY SCREEN ===== */
+  #summary-screen {
+    display: none;
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 0 16px;
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+  }
+  .summary-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: 48px 40px;
+  }
+  .summary-emoji { font-size: 4rem; margin-bottom: 16px; }
+  .summary-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .summary-score {
+    font-size: 3.5rem;
+    font-family: 'Fredoka One', cursive;
+    color: var(--blue);
+    margin: 20px 0;
+  }
+  .summary-sub { color: var(--gray); font-size: 1rem; margin-bottom: 28px; }
+  .summary-breakdown { text-align: left; margin-bottom: 28px; }
+  .breakdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.93rem;
+  }
+  .breakdown-icon { font-size: 1.1rem; }
+  .restart-btn {
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 36px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .restart-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(37,99,235,0.3); }
+
+  /* ===== PASSAGE TOGGLE ===== */
+  .passage-toggle {
+    display: none;
+    background: var(--navy);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 16px;
+    width: 100%;
+  }
+  @media (max-width: 800px) {
+    .passage-toggle { display: block; }
+    .passage-card { display: none; }
+    .passage-card.open { display: block; }
+  }
+
+  /* Reading skill chip */
+  .skill-chip {
+    display: inline-block;
+    background: #eff6ff;
+    color: var(--blue);
+    border: 1.5px solid #bfdbfe;
+    border-radius: 99px;
+    padding: 2px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-title">
+      ⭐ Reading Practice
+      <span class="star-badge">GRADE 5</span>
+    </div>
+    <div class="header-progress">
+      <span id="progress-text">Question 1 of 10</span>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar" style="width:10%"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- QUIZ SCREEN -->
+<div id="quiz-screen">
+  <div class="main-wrap">
+
+    <!-- LEFT: Passage + Questions -->
+    <div>
+      <button class="passage-toggle" id="passage-toggle-btn" onclick="togglePassage()">📖 Show/Hide Passage</button>
+
+      <!-- Passage card -->
+      <div class="passage-card" id="passage-card">
+        <div class="passage-header">
+          <div class="passage-title" id="passage-title">Loading...</div>
+          <div class="passage-tag" id="passage-tag">Fiction</div>
+        </div>
+        <div class="passage-body" id="passage-body"></div>
+        <div class="questions-area" id="questions-area"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Sidebar -->
+    <div class="sidebar">
+
+      <!-- Score -->
+      <div class="tool-card">
+        <div class="tool-header">📊 My Score</div>
+        <div class="tool-body">
+          <div class="score-display">
+            <div>
+              <div class="score-num" id="score-num">0/0</div>
+              <div class="score-label">CORRECT</div>
+            </div>
+            <div style="font-size:2rem;" id="score-emoji">🌟</div>
+          </div>
+          <div class="score-dots" id="score-dots"></div>
+        </div>
+      </div>
+
+      <!-- Question Map -->
+      <div class="tool-card">
+        <div class="tool-header">🗺️ Question Map</div>
+        <div class="tool-body">
+          <div class="q-map" id="q-map"></div>
+          <div class="nav-btns">
+            <button class="nav-btn" onclick="prevQ()">← Prev</button>
+            <button class="nav-btn" onclick="nextQ()">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Highlighter -->
+      <div class="tool-card">
+        <div class="tool-header">🖊️ Highlighter</div>
+        <div class="tool-body">
+          <div class="highlight-btns">
+            <button class="hl-btn hl-yellow" onclick="setHighlight('yellow',this)">Yellow</button>
+            <button class="hl-btn hl-blue" onclick="setHighlight('blue',this)">Blue</button>
+            <button class="hl-btn hl-pink" onclick="setHighlight('pink',this)">Pink</button>
+            <button class="hl-btn hl-clear" onclick="setHighlight('clear',this)">✕ Clear</button>
+          </div>
+          <div class="hl-tip">Select text in the passage, then click a color to highlight it. Use it to mark important details!</div>
+        </div>
+      </div>
+
+      <!-- Sticky Note -->
+      <div class="tool-card">
+        <div class="tool-header">📝 Sticky Note</div>
+        <div class="tool-body">
+          <div class="note-label">JOT DOWN YOUR THOUGHTS:</div>
+          <textarea class="sticky-note-area" id="sticky-note" placeholder="Write key ideas, predictions, or notes here..."></textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY SCREEN -->
+<div id="summary-screen">
+  <div class="summary-card">
+    <div class="summary-emoji" id="sum-emoji">🌟</div>
+    <div class="summary-title">Quiz Complete!</div>
+    <div class="summary-score" id="sum-score">0/10</div>
+    <div class="summary-sub" id="sum-sub">Keep practicing — you're getting stronger every day!</div>
+    <div class="summary-breakdown" id="sum-breakdown"></div>
+    <button class="restart-btn" onclick="restartQuiz()">🔄 Try Again</button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  DATA: 3 passages, 10 questions total (STAAR-style, original)
+// ============================================================
+const passages = [
+  {
+    id: 'p1',
+    title: 'The Cloud Watcher',
+    tag: 'Fiction',
+    body: `<p><span class="p-num">1</span> Every afternoon after school, Maya climbed to the roof of her family's building and watched the clouds. She kept a worn notebook where she drew their shapes and gave each one a name. Some days the clouds were wispy and pale, like threads of white silk scattered across a blue sheet. Other days they piled up into enormous towers that seemed to scrape the sky.</p>
+    <p><span class="p-num">2</span> Her older brother Tomás thought it was a waste of time. "You could be playing soccer," he said one afternoon, kicking a ball at her feet. "Or learning guitar. Or doing anything useful."</p>
+    <p><span class="p-num">3</span> "Watching clouds is useful," Maya replied, not looking up from her notebook. "I'm learning to read the sky."</p>
+    <p><span class="p-num">4</span> Tomás rolled his eyes and headed downstairs. Maya didn't mind. She had learned that people who didn't understand something often called it useless.</p>
+    <p><span class="p-num">5</span> Two weeks later, Maya's school held its annual Science Fair. Students carried in poster boards and models. Maya brought only her cloud notebook. When the judges arrived at her table, she explained exactly how different cloud types predicted weather changes. She pointed to her sketches and described how cumulonimbus clouds almost always meant thunderstorms were coming. One of the judges, a meteorologist from the local news station, leaned forward with wide eyes.</p>
+    <p><span class="p-num">6</span> "Did you figure this out yourself?" he asked.</p>
+    <p><span class="p-num">7</span> "I observed and recorded," Maya said proudly. "That's what scientists do."</p>
+    <p><span class="p-num">8</span> Maya won first place. On the way home, Tomás was quiet for a moment. Then he said, "Maybe watching clouds isn't so useless after all."</p>
+    <p><span class="p-num">9</span> Maya smiled and opened her notebook to a fresh page.`,
+    questions: [
+      {
+        num: 1,
+        skill: 'Figurative Language',
+        text: 'Read this sentence from paragraph 1.',
+        quote: 'Some days the clouds were wispy and pale, like threads of white silk scattered across a blue sheet.',
+        stem: 'What literary device does the author use in this sentence, and what does it help the reader understand?',
+        choices: [
+          { letter: 'A', text: 'A metaphor that shows the clouds are made of silk fabric' },
+          { letter: 'B', text: 'A simile that helps the reader picture how light and delicate the clouds looked' },
+          { letter: 'C', text: 'Personification that shows the clouds have human feelings' },
+          { letter: 'D', text: 'An idiom that means the sky is covered in thin material' }
+        ],
+        correct: 'B',
+        explanation: '✅ Correct! This is a simile — it uses the word "like" to compare the clouds to threads of white silk. Similes use "like" or "as" to make a comparison. This one helps readers picture how thin and delicate the clouds looked.',
+        reteach: '📚 Reteach: A <strong>simile</strong> compares two unlike things using "like" or "as." It\'s different from a metaphor, which says one thing IS another. Look for "like" or "as" as clue words. The simile here paints a picture of wispy, gentle clouds.'
+      },
+      {
+        num: 2,
+        skill: 'Character Inference',
+        text: 'What can the reader infer about Maya based on paragraph 4?',
+        quote: null,
+        stem: null,
+        choices: [
+          { letter: 'F', text: 'Maya feels hurt by what her brother said and wants him to apologize.' },
+          { letter: 'G', text: 'Maya is confident in her hobby and is not discouraged by others\' opinions.' },
+          { letter: 'H', text: 'Maya agrees that cloud watching is not as valuable as her brother thinks.' },
+          { letter: 'J', text: 'Maya is planning to stop watching clouds to make her brother happy.' }
+        ],
+        correct: 'G',
+        explanation: '✅ Correct! Paragraph 4 says Maya "didn\'t mind" when Tomás left, and she reflects that people who don\'t understand something call it useless. This shows she is confident and unbothered.',
+        reteach: '📚 Reteach: When making an <strong>inference</strong>, look for clues in what the character does, says, and thinks. Maya\'s calm reaction and her wise thought about people misunderstanding things shows she believes in herself.'
+      },
+      {
+        num: 3,
+        skill: 'Theme',
+        text: 'What is the main theme of "The Cloud Watcher"?',
+        quote: null,
+        stem: null,
+        choices: [
+          { letter: 'A', text: 'Winning a competition is the most important goal for a student.' },
+          { letter: 'B', text: 'Careful observation and dedication can reveal great knowledge.' },
+          { letter: 'C', text: 'Brothers and sisters rarely get along with each other.' },
+          { letter: 'D', text: 'Science fairs are the best way to show off what you know.' }
+        ],
+        correct: 'B',
+        explanation: '✅ Correct! Maya\'s patient observation of clouds leads to real scientific knowledge that impresses a professional meteorologist and wins first place. The story shows that careful, dedicated observation is powerful.',
+        reteach: '📚 Reteach: The <strong>theme</strong> is the big life lesson the story teaches — it goes beyond just the plot. Ask yourself: "What does the author want me to take away from this story?" Maya\'s journey shows the value of patient observation.'
+      }
+    ]
+  },
+  {
+    id: 'p2',
+    title: 'Why Bees Matter More Than You Think',
+    tag: 'Informational',
+    body: `<p><span class="p-num">1</span> You might not think much about bees — unless one flies too close at a picnic. But bees are one of the most important animals on Earth, and life as we know it could not exist without them.</p>
+    <p><span class="p-num">2</span> Bees are pollinators. This means they carry pollen from one flower to another as they travel. When pollen moves between flowers of the same plant, it allows the plant to make seeds and fruit. Scientists estimate that about one-third of all the food humans eat depends on pollination by bees and other insects. That includes apples, almonds, blueberries, cucumbers, and hundreds of other crops.</p>
+    <p><span class="p-num">3</span> Unfortunately, bee populations around the world have been declining for decades. Habitat loss, pesticide use, and disease have all reduced the number of wild bees. In the United States alone, some species of bumblebees have lost more than 90 percent of their population.</p>
+    <p><span class="p-num">4</span> Some people argue that humans could find other ways to pollinate crops without bees, such as using machines or other insects. While scientists are exploring these options, no solution so far has been as efficient or affordable as bees. Bees have been doing this work for millions of years, perfectly adapted to the job.</p>
+    <p><span class="p-num">5</span> The good news is that people can help. Planting wildflowers, avoiding certain pesticides, and supporting local beekeepers are all actions that can protect bee populations. Even in cities, rooftop gardens and window boxes of flowering plants can create safe habitats for bees.</p>
+    <p><span class="p-num">6</span> Protecting bees means protecting our food supply — and the health of the entire planet.`,
+    questions: [
+      {
+        num: 4,
+        skill: 'Author\'s Purpose',
+        text: 'What is the most likely reason the author wrote "Why Bees Matter More Than You Think"?',
+        quote: null,
+        stem: null,
+        choices: [
+          { letter: 'F', text: 'To entertain readers with a funny story about a bee at a picnic' },
+          { letter: 'G', text: 'To persuade readers that all insects are equally important to humans' },
+          { letter: 'H', text: 'To inform readers about bees\' role in the food supply and why protecting them matters' },
+          { letter: 'J', text: 'To explain why machines are better at pollinating plants than bees' }
+        ],
+        correct: 'H',
+        explanation: '✅ Correct! The author provides facts about what bees do, why their numbers are falling, and what people can do to help. This is an informational text meant to teach and raise awareness.',
+        reteach: '📚 Reteach: <strong>Author\'s purpose</strong> is WHY the author wrote the text. Use the acronym PIE — Persuade, Inform, or Entertain. This article gives facts and ends with action steps, so its main purpose is to inform (and slightly persuade readers to care about bees).'
+      },
+      {
+        num: 5,
+        skill: 'Text Structure',
+        text: 'How does paragraph 4 help develop the author\'s main idea?',
+        quote: null,
+        stem: null,
+        choices: [
+          { letter: 'A', text: 'It introduces a different opinion and then explains why bees are still the best solution' },
+          { letter: 'B', text: 'It proves that machines are just as effective as bees at pollinating crops' },
+          { letter: 'C', text: 'It describes how bees were first discovered by scientists millions of years ago' },
+          { letter: 'D', text: 'It shows that people have stopped trying to find solutions to the bee problem' }
+        ],
+        correct: 'A',
+        explanation: '✅ Correct! Paragraph 4 mentions a counterargument (people think machines could replace bees) and then refutes it by explaining that no solution is as efficient or affordable as bees. This strengthens the main idea.',
+        reteach: '📚 Reteach: Authors sometimes include <strong>counterarguments</strong> — ideas that disagree with their main point — and then explain why those ideas don\'t fully work. This technique is called "acknowledging and refuting." It actually makes the author\'s argument stronger.'
+      },
+      {
+        num: 6,
+        skill: 'Key Idea & Details',
+        text: 'Which detail from the selection BEST supports the claim that bees are critically important to human food?',
+        quote: null,
+        stem: null,
+        choices: [
+          { letter: 'F', text: 'Bees sometimes fly close to people at outdoor picnics.' },
+          { letter: 'G', text: 'About one-third of all human food depends on pollination by bees and other insects.' },
+          { letter: 'H', text: 'In cities, rooftop gardens can create safe habitats for bees.' },
+          { letter: 'J', text: 'People can help bees by planting wildflowers and avoiding pesticides.' }
+        ],
+        correct: 'G',
+        explanation: '✅ Correct! The statistic that one-third of human food depends on bee pollination is a strong, specific detail that directly supports the claim that bees are critically important.',
+        reteach: '📚 Reteach: When identifying supporting details, ask: "Which piece of evidence most DIRECTLY connects to the claim?" Details about what people can do (F, H, J) are helpful but they don\'t directly prove the importance of bees to our food supply the way the one-third statistic does.'
+      },
+      {
+        num: 7,
+        skill: 'Vocabulary in Context',
+        text: 'Read this sentence from paragraph 4.',
+        quote: 'Bees have been doing this work for millions of years, perfectly adapted to the job.',
+        stem: 'What does the word adapted mean in this sentence?',
+        choices: [
+          { letter: 'A', text: 'Changed or modified over time to suit a purpose' },
+          { letter: 'B', text: 'Trained by scientists to follow specific instructions' },
+          { letter: 'C', text: 'Borrowed from other animals to do a new task' },
+          { letter: 'D', text: 'Replaced by newer and more modern creatures' }
+        ],
+        correct: 'A',
+        explanation: '✅ Correct! In context, "adapted" means bees have changed and developed over millions of years to become perfectly suited to pollination. This is the scientific meaning of adaptation.',
+        reteach: '📚 Reteach: Use context clues to figure out word meaning. The sentence says bees have done this work "for millions of years," suggesting a long natural process of change and development — that\'s <strong>adaptation</strong>. Look at the surrounding sentences for clues about what a word means.'
+      }
+    ]
+  },
+  {
+    id: 'p3',
+    title: 'The Last Game',
+    tag: 'Fiction',
+    body: `<p><span class="p-num">1</span> The gymnasium smelled like sneakers and nervousness. Leo sat on the bench, watching his teammates warm up for the city championship game. His ankle was wrapped in a bandage. He wouldn't be playing today.</p>
+    <p><span class="p-num">2</span> "It's not fair," he muttered. He had worked harder than anyone on the Westside Wolves. He had arrived at every practice early and stayed late. He had watched game film when his friends were out having fun. And now, because of one bad landing during warm-ups, it was all gone.</p>
+    <p><span class="p-num">3</span> Coach Rivera walked over and sat beside him. She didn't say anything at first. They both watched Marcus dribble through the lane and sink a layup.</p>
+    <p><span class="p-num">4</span> "I know what you're thinking," she finally said.</p>
+    <p><span class="p-num">5</span> "That it isn't fair," Leo said bitterly.</p>
+    <p><span class="p-num">6</span> "It isn't," she agreed. "But I need something from you today. I need you to be the loudest voice in this gym. Your teammates have been watching you all season. They trust you. That doesn't stop when you sit down."</p>
+    <p><span class="p-num">7</span> Leo looked up. He thought about Marcus, who always panicked under pressure. And Deja, who needed someone to remind her to be aggressive on defense. He knew this team better than anyone. Maybe there was something he could give them even from the bench.</p>
+    <p><span class="p-num">8</span> When the opening whistle blew, Leo leaned forward. "Marcus — drive left!" he called. "Deja, stay with number twelve!"</p>
+    <p><span class="p-num">9</span> By the fourth quarter, the Wolves were ahead by four. And when the final buzzer sounded, his teammates didn't sprint to the center of the court first. They ran to the bench — to Leo.</p>
+    <p><span class="p-num">10</span> "We couldn't have done it without you," Marcus said, breathing hard.</p>
+    <p><span class="p-num">11</span> Leo smiled. He had always thought leadership meant being the best player. Now he understood it could mean something else entirely.`,
+    questions: [
+      {
+        num: 8,
+        skill: 'Plot — Conflict',
+        text: 'What is the main conflict Leo faces at the beginning of the story?',
+        quote: null,
+        stem: null,
+        choices: [
+          { letter: 'F', text: 'Leo is afraid that his team does not like him.' },
+          { letter: 'G', text: 'Leo is unable to play in the championship game due to an injury and feels it is unfair.' },
+          { letter: 'H', text: 'Leo disagrees with Coach Rivera about how the team should practice.' },
+          { letter: 'J', text: 'Leo does not know his teammates well enough to help them.' }
+        ],
+        correct: 'G',
+        explanation: '✅ Correct! Leo\'s injured ankle prevents him from playing in the championship — a game he worked all season for. He feels this is deeply unfair. This is the central conflict that drives the story.',
+        reteach: '📚 Reteach: A story\'s <strong>conflict</strong> is the main problem or struggle. There are several types: person vs. person, person vs. nature, person vs. self, person vs. society. Leo\'s conflict is mostly internal (person vs. self) — he must deal with his frustration and find a new way to contribute.'
+      },
+      {
+        num: 9,
+        skill: 'Character Change',
+        text: 'How does Leo change from the beginning to the end of the story?',
+        quote: null,
+        stem: null,
+        choices: [
+          { letter: 'A', text: 'He goes from being a selfish player to being the team\'s best scorer.' },
+          { letter: 'B', text: 'He goes from feeling sorry for himself to finding a meaningful way to lead.' },
+          { letter: 'C', text: 'He goes from trusting his coach to questioning all of her decisions.' },
+          { letter: 'D', text: 'He goes from being the team\'s star player to accepting that he is not good enough.' }
+        ],
+        correct: 'B',
+        explanation: '✅ Correct! At first Leo is bitter and says "it isn\'t fair." By the end, he finds a way to contribute as a vocal leader from the bench, and his teammates celebrate him. He grows beyond self-pity into real leadership.',
+        reteach: '📚 Reteach: <strong>Character change</strong> (also called character development) means looking at how a character\'s feelings, beliefs, or actions shift from the beginning to the end. Compare Leo\'s words and feelings in paragraph 2 to his actions in paragraphs 8–11 to see the change.'
+      },
+      {
+        num: 10,
+        skill: 'Theme',
+        text: 'Which statement BEST expresses a theme of "The Last Game"?',
+        quote: null,
+        stem: null,
+        choices: [
+          { letter: 'F', text: 'Winning a championship is the most important thing in sports.' },
+          { letter: 'G', text: 'Injuries should never stop an athlete from playing in a big game.' },
+          { letter: 'H', text: 'True leadership can take many different forms, including supporting others.' },
+          { letter: 'J', text: 'Coaches always know what is best for their players.' }
+        ],
+        correct: 'H',
+        explanation: '✅ Correct! The final paragraph states it directly: "He had always thought leadership meant being the best player. Now he understood it could mean something else entirely." The theme is about redefining what leadership looks like.',
+        reteach: '📚 Reteach: Sometimes the <strong>theme</strong> is stated almost directly at the end of a story — authors often place the "lesson learned" near the conclusion. Leo\'s realization in paragraph 11 is the author telling us the theme: leadership is about more than personal performance.'
+      }
+    ]
+  }
+];
+
+// ============================================================
+//  STATE
+// ============================================================
+let allQuestions = [];
+let currentQIndex = 0;
+let answers = {}; // { qNum: 'A'/'B'/etc }
+let score = 0;
+let highlightColor = null;
+let totalCorrect = 0;
+
+function buildAllQuestions() {
+  allQuestions = [];
+  passages.forEach(p => {
+    p.questions.forEach(q => {
+      allQuestions.push({ ...q, passageId: p.id });
+    });
+  });
+}
+
+// ============================================================
+//  INIT
+// ============================================================
+function init() {
+  buildAllQuestions();
+  answers = {};
+  score = 0;
+  totalCorrect = 0;
+  currentQIndex = 0;
+  buildQMap();
+  buildScoreDots();
+  renderQuestion(0);
+  document.getElementById('quiz-screen').style.display = '';
+  document.getElementById('summary-screen').style.display = 'none';
+  document.getElementById('sticky-note').value = '';
+}
+
+// ============================================================
+//  RENDER
+// ============================================================
+function renderQuestion(idx) {
+  const q = allQuestions[idx];
+  const passage = passages.find(p => p.id === q.passageId);
+
+  // Passage
+  document.getElementById('passage-title').textContent = passage.title;
+  document.getElementById('passage-tag').textContent = passage.tag;
+  document.getElementById('passage-body').innerHTML = passage.body;
+
+  // Header progress
+  document.getElementById('progress-text').textContent = `Question ${idx + 1} of ${allQuestions.length}`;
+  document.getElementById('progress-bar').style.width = `${((idx + 1) / allQuestions.length) * 100}%`;
+
+  // Questions area
+  const qa = document.getElementById('questions-area');
+  qa.innerHTML = '';
+
+  const qBlock = document.createElement('div');
+  qBlock.className = 'q-block';
+  qBlock.id = `qblock-${q.num}`;
+
+  // Skill chip
+  const chip = document.createElement('div');
+  chip.className = 'skill-chip';
+  chip.textContent = `📌 Reading Skill: ${q.skill}`;
+  qBlock.appendChild(chip);
+
+  const hr = document.createElement('hr');
+  hr.className = 'section-divider';
+  hr.style.marginTop = '0';
+  qBlock.appendChild(hr);
+
+  // Question number
+  const qnum = document.createElement('div');
+  qnum.className = 'q-num';
+  qnum.textContent = `Question ${q.num}`;
+  qBlock.appendChild(qnum);
+
+  // Question text
+  const qtext = document.createElement('div');
+  qtext.className = 'q-text';
+  qtext.textContent = q.text;
+  qBlock.appendChild(qtext);
+
+  // Quote if any
+  if (q.quote) {
+    const qquote = document.createElement('div');
+    qquote.className = 'q-quote';
+    qquote.textContent = `"${q.quote}"`;
+    qBlock.appendChild(qquote);
+  }
+
+  // Stem if any
+  if (q.stem) {
+    const qstem = document.createElement('div');
+    qstem.className = 'q-text';
+    qstem.style.fontWeight = '700';
+    qstem.textContent = q.stem;
+    qBlock.appendChild(qstem);
+  }
+
+  // Choices
+  const choicesDiv = document.createElement('div');
+  choicesDiv.className = 'choices';
+  const isAnswered = answers[q.num] !== undefined;
+
+  q.choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    if (isAnswered) {
+      btn.classList.add('answered');
+      if (c.letter === q.correct) btn.classList.add('correct');
+      else if (c.letter === answers[q.num] && c.letter !== q.correct) btn.classList.add('incorrect');
+    }
+
+    const ltr = document.createElement('span');
+    ltr.className = 'choice-letter';
+    ltr.textContent = c.letter;
+
+    const txt = document.createElement('span');
+    txt.textContent = c.text;
+
+    // Eliminate button
+    const elimBtn = document.createElement('button');
+    elimBtn.className = 'elim-btn';
+    elimBtn.innerHTML = '✕';
+    elimBtn.title = 'Eliminate this choice';
+    elimBtn.onclick = (e) => {
+      e.stopPropagation();
+      if (!isAnswered) btn.classList.toggle('eliminated');
+    };
+
+    btn.appendChild(ltr);
+    btn.appendChild(txt);
+    btn.appendChild(elimBtn);
+
+    if (!isAnswered) {
+      btn.onclick = () => selectAnswer(q, c.letter);
+    }
+    choicesDiv.appendChild(btn);
+  });
+
+  qBlock.appendChild(choicesDiv);
+
+  // Submit button (only if not answered yet — but we auto-check)
+  // Feedback
+  const feedback = document.createElement('div');
+  feedback.className = 'feedback-box';
+  feedback.id = `feedback-${q.num}`;
+  if (isAnswered) {
+    const isCorrect = answers[q.num] === q.correct;
+    feedback.classList.add('show', isCorrect ? 'correct-fb' : 'incorrect-fb');
+    feedback.innerHTML = `<div class="fb-title">${isCorrect ? '✅ Great job!' : '❌ Not quite.'}</div>
+      ${q.explanation}
+      <div class="reteach">${q.reteach}</div>`;
+  }
+  qBlock.appendChild(feedback);
+
+  qa.appendChild(qBlock);
+
+  // Next button (persistent in DOM, toggled via class)
+  const nextWrap = document.createElement('div');
+  nextWrap.className = 'next-btn-wrap';
+  nextWrap.id = 'next-btn-wrap';
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'next-q-btn';
+  nextBtn.id = 'next-q-btn';
+  nextBtn.textContent = '➡️ Next Question';
+  const nextHint = document.createElement('span');
+  nextHint.className = 'next-hint';
+  nextHint.textContent = 'Read the feedback above before moving on!';
+  nextWrap.appendChild(nextBtn);
+  nextWrap.appendChild(nextHint);
+  qa.appendChild(nextWrap);
+
+  // Update map
+  updateQMap();
+  updateScore();
+
+  // If already answered, restore next button state
+  if (isAnswered) {
+    const nw = document.getElementById('next-btn-wrap');
+    const nb = document.getElementById('next-q-btn');
+    if (nw && nb) {
+      const isLast = idx >= allQuestions.length - 1;
+      nw.classList.add('show');
+      nb.textContent = isLast ? '🏁 See My Results' : '➡️ Next Question';
+      nb.className = 'next-q-btn' + (isLast ? ' finish' : '');
+      nb.onclick = () => {
+        nw.classList.remove('show');
+        if (isLast) { showSummary(); } else { nextQ(); }
+      };
+    }
+  }
+}
+
+function selectAnswer(q, letter) {
+  if (answers[q.num] !== undefined) return;
+
+  answers[q.num] = letter;
+  const isCorrect = letter === q.correct;
+  if (isCorrect) totalCorrect++;
+
+  // Update UI immediately
+  const choiceBtns = document.querySelectorAll('.choice-btn');
+  choiceBtns.forEach(btn => {
+    const ltr = btn.querySelector('.choice-letter').textContent;
+    btn.classList.add('answered');
+    if (ltr === q.correct) btn.classList.add('correct');
+    else if (ltr === letter && !isCorrect) btn.classList.add('incorrect');
+  });
+
+  // Show feedback
+  const fb = document.getElementById(`feedback-${q.num}`);
+  fb.classList.add('show', isCorrect ? 'correct-fb' : 'incorrect-fb');
+  fb.innerHTML = `<div class="fb-title">${isCorrect ? '✅ Great job!' : '❌ Not quite.'}</div>
+    ${q.explanation}
+    <div class="reteach">${q.reteach}</div>`;
+
+  updateQMap();
+  updateScore();
+
+  // Show Next Question button
+  const nextWrap = document.getElementById('next-btn-wrap');
+  const nextBtn  = document.getElementById('next-q-btn');
+  const isLast   = currentQIndex >= allQuestions.length - 1;
+  nextWrap.classList.add('show');
+  nextBtn.textContent = isLast ? '🏁 See My Results' : '➡️ Next Question';
+  nextBtn.className   = 'next-q-btn' + (isLast ? ' finish' : '');
+  nextBtn.onclick     = () => {
+    nextWrap.classList.remove('show');
+    if (isLast) { showSummary(); } else { nextQ(); }
+  };
+
+  // Scroll feedback into view smoothly
+  fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ============================================================
+//  NAVIGATION
+// ============================================================
+function nextQ() {
+  if (currentQIndex < allQuestions.length - 1) {
+    currentQIndex++;
+    renderQuestion(currentQIndex);
+  } else {
+    showSummary();
+  }
+}
+
+function prevQ() {
+  if (currentQIndex > 0) {
+    currentQIndex--;
+    renderQuestion(currentQIndex);
+  }
+}
+
+function goToQ(idx) {
+  currentQIndex = idx;
+  renderQuestion(idx);
+}
+
+// ============================================================
+//  QUESTION MAP
+// ============================================================
+function buildQMap() {
+  const map = document.getElementById('q-map');
+  map.innerHTML = '';
+  allQuestions.forEach((q, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'q-dot';
+    dot.textContent = i + 1;
+    dot.id = `qdot-${i}`;
+    dot.onclick = () => goToQ(i);
+    map.appendChild(dot);
+  });
+}
+
+function updateQMap() {
+  allQuestions.forEach((q, i) => {
+    const dot = document.getElementById(`qdot-${i}`);
+    if (!dot) return;
+    dot.className = 'q-dot';
+    if (i === currentQIndex) dot.classList.add('active');
+    else if (answers[q.num] !== undefined) {
+      dot.classList.add(answers[q.num] === q.correct ? 'answered-correct' : 'answered-incorrect');
+    }
+  });
+}
+
+// ============================================================
+//  SCORE
+// ============================================================
+function buildScoreDots() {
+  const dots = document.getElementById('score-dots');
+  dots.innerHTML = '';
+  allQuestions.forEach((q, i) => {
+    const d = document.createElement('div');
+    d.className = 'score-dot';
+    d.id = `sdot-${i}`;
+    dots.appendChild(d);
+  });
+}
+
+function updateScore() {
+  const answered = Object.keys(answers).length;
+  document.getElementById('score-num').textContent = `${totalCorrect}/${answered}`;
+  const pct = answered > 0 ? totalCorrect / answered : 0;
+  document.getElementById('score-emoji').textContent =
+    pct >= 0.8 ? '🌟' : pct >= 0.6 ? '😊' : '💪';
+
+  allQuestions.forEach((q, i) => {
+    const d = document.getElementById(`sdot-${i}`);
+    if (!d) return;
+    d.className = 'score-dot';
+    if (answers[q.num] !== undefined) {
+      d.classList.add(answers[q.num] === q.correct ? 'correct' : 'incorrect');
+    }
+  });
+}
+
+// ============================================================
+//  SUMMARY
+// ============================================================
+function showSummary() {
+  setTimeout(() => {
+    document.getElementById('quiz-screen').style.display = 'none';
+    const sum = document.getElementById('summary-screen');
+    sum.style.display = 'block';
+
+    const pct = totalCorrect / allQuestions.length;
+    document.getElementById('sum-score').textContent = `${totalCorrect}/${allQuestions.length}`;
+    document.getElementById('sum-emoji').textContent =
+      pct >= 0.9 ? '🏆' : pct >= 0.7 ? '⭐' : pct >= 0.5 ? '💪' : '📚';
+    document.getElementById('sum-sub').textContent =
+      pct >= 0.9 ? 'Outstanding! You\'re a reading star!' :
+      pct >= 0.7 ? 'Great work! You\'re getting stronger every day.' :
+      pct >= 0.5 ? 'Good effort! Review the feedback and try again.' :
+      'Keep practicing — every reader improves with time!';
+
+    const bd = document.getElementById('sum-breakdown');
+    bd.innerHTML = allQuestions.map((q, i) => {
+      const correct = answers[q.num] === q.correct;
+      return `<div class="breakdown-item">
+        <span class="breakdown-icon">${correct ? '✅' : '❌'}</span>
+        <span style="flex:1"><strong>Q${i + 1}:</strong> ${q.skill}</span>
+        <span style="color:${correct ? 'var(--green)' : 'var(--red)'}; font-weight:700">${correct ? 'Correct' : 'Review'}</span>
+      </div>`;
+    }).join('');
+  }, 500);
+}
+
+function restartQuiz() {
+  init();
+}
+
+// ============================================================
+//  HIGHLIGHTER
+// ============================================================
+function setHighlight(color, btn) {
+  document.querySelectorAll('.hl-btn').forEach(b => b.classList.remove('active'));
+  if (highlightColor === color) {
+    highlightColor = null;
+  } else {
+    highlightColor = color;
+    btn.classList.add('active');
+  }
+}
+
+document.addEventListener('mouseup', () => {
+  if (!highlightColor) return;
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed) return;
+  const range = sel.getRangeAt(0);
+  const passageBody = document.getElementById('passage-body');
+  if (!passageBody.contains(range.commonAncestorContainer)) return;
+
+  if (highlightColor === 'clear') {
+    // Clear highlights in selection
+    return;
+  }
+
+  const span = document.createElement('span');
+  span.className = `highlight-${highlightColor}`;
+  try {
+    range.surroundContents(span);
+  } catch(e) {
+    // Complex selection — just wrap
+    const fragment = range.extractContents();
+    span.appendChild(fragment);
+    range.insertNode(span);
+  }
+  sel.removeAllRanges();
+});
+
+// ============================================================
+//  MOBILE PASSAGE TOGGLE
+// ============================================================
+function togglePassage() {
+  const card = document.getElementById('passage-card');
+  card.classList.toggle('open');
+}
+
+// ============================================================
+//  START
+// ============================================================
+init();
+</script>
+</body>
+</html>
